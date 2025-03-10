@@ -12,8 +12,8 @@ import java.time.Duration;
 
 public class DriverSetup {
 
-    public static final String browserName = System.getProperty ("browser", "Chrome");
-    public static final ThreadLocal<WebDriver> WEB_DRIVER_THREAD_LOCAL = new ThreadLocal<> ();
+    public static final String BROWSER_NAME = System.getProperty ("browser", "Chrome");
+    private static final ThreadLocal<WebDriver> WEB_DRIVER_THREAD_LOCAL = new ThreadLocal<> ();
 
     public static WebDriver getWebDriverThreadLocal () {
         return WEB_DRIVER_THREAD_LOCAL.get ();
@@ -39,7 +39,7 @@ public class DriverSetup {
 
     @BeforeMethod
     public void setBrowserName () {
-        WebDriver driver = getBrowser (browserName);
+        WebDriver driver = getBrowser (BROWSER_NAME);
         driver.manage ().window ().maximize ();
         driver.manage ().deleteAllCookies ();
         driver.manage ().timeouts ().implicitlyWait (Duration.ofSeconds (15));
@@ -48,6 +48,10 @@ public class DriverSetup {
 
     @AfterMethod
     public void quitBrowser () {
-        getWebDriverThreadLocal ().quit ();
+        WebDriver driver = getWebDriverThreadLocal ();
+        if (driver != null) {
+            driver.quit ();
+            WEB_DRIVER_THREAD_LOCAL.remove ();
+        }
     }
 }

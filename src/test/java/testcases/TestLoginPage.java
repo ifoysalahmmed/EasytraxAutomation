@@ -3,13 +3,13 @@ package testcases;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.HomePage;
+import pages.DashboardPage;
 import pages.LoginPage;
 import utilities.DriverSetup;
 
 public class TestLoginPage extends DriverSetup {
 
-    HomePage homePage = new HomePage ();
+    DashboardPage dashboardPage = new DashboardPage ();
     LoginPage loginPage = new LoginPage ();
 
     @BeforeMethod
@@ -22,8 +22,8 @@ public class TestLoginPage extends DriverSetup {
         loginPage.writeOnElement (loginPage.login_email, email);
         loginPage.writeOnElement (loginPage.login_password, password);
         loginPage.clickOnElement (loginPage.login_button);
-        loginPage.clickOnElement (homePage.user_profile);
-        Assert.assertTrue (loginPage.getDisplayState (homePage.logout_button));
+        loginPage.clickOnElement (dashboardPage.user_profile);
+        Assert.assertTrue (loginPage.getDisplayState (dashboardPage.logout_button));
         Assert.assertFalse (loginPage.getDisplayState (loginPage.login_button));
     }
 

@@ -1,4 +1,4 @@
-# Test Automation Project
+# Easytrax Automation Project
 
 This project is a test automation suite for a web application using Selenium and TestNG.
 

@@ -13,14 +13,16 @@ public class BasePage {
 
     public String baseURL = "https://platform.easytrax.com.bd/auth";
 
+    private WebDriverWait getWait () {
+        return new WebDriverWait (getWebDriverThreadLocal (), Duration.ofSeconds (10));
+    }
+
     public WebElement getWebElement (By locator) {
-        WebDriverWait wait = new WebDriverWait (getWebDriverThreadLocal (), Duration.ofSeconds (10));
-        return wait.until (ExpectedConditions.presenceOfElementLocated (locator));
+        return getWait ().until (ExpectedConditions.presenceOfElementLocated (locator));
     }
 
     public void clickOnElement (By locator) {
-        WebDriverWait wait = new WebDriverWait (getWebDriverThreadLocal (), Duration.ofSeconds (10));
-        wait.until (ExpectedConditions.elementToBeClickable (locator)).click ();
+        getWait ().until (ExpectedConditions.elementToBeClickable (locator)).click ();
     }
 
     public void openPage (String URL) {
