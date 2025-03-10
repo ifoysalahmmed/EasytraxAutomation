@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Suite" verbose="1">
+    <test name="TestCases" preserve-order="true" verbose="2">
+        <classes>
+            <class name="testcases.TestLoginPage">
+                <methods>
+                    <include name="test_login_with_valid_credentials"/>
+                    <include name="test_login_with_invalid_credentials"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
