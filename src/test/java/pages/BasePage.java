@@ -13,40 +13,44 @@ public class BasePage {
 
     public String baseURL = "https://platform.easytrax.com.bd/auth";
 
-    private WebDriverWait getWait () {
-        return new WebDriverWait (getWebDriverThreadLocal (), Duration.ofSeconds (10));
+    private WebDriverWait getWait() {
+        return new WebDriverWait(getWebDriverThreadLocal(), Duration.ofSeconds(10));
     }
 
-    public WebElement getWebElement (By locator) {
-        return getWait ().until (ExpectedConditions.presenceOfElementLocated (locator));
+    // Navigation methods
+    public void openPage(String URL) {
+        getWebDriverThreadLocal().get(URL);
     }
 
-    public void clickOnElement (By locator) {
-        getWait ().until (ExpectedConditions.elementToBeClickable (locator)).click ();
+    // Element interaction methods
+    public WebElement getWebElement(By locator) {
+        return getWait().until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
-    public void openPage (String URL) {
-        getWebDriverThreadLocal ().get (URL);
+    public void clickOnElement(By locator) {
+        getWait().until(ExpectedConditions.elementToBeClickable(locator)).click();
     }
 
-    public void writeOnElement (By locator, String text) {
-        getWebElement (locator).clear ();
-        getWebElement (locator).sendKeys (text);
+    public void writeOnElement(By locator, String text) {
+        WebElement element = getWebElement(locator);
+        element.clear();
+        element.sendKeys(text);
     }
 
-    public Boolean getDisplayState (By locator) {
+    // Element state and attribute methods
+    public Boolean getDisplayState(By locator) {
         try {
-            return getWebDriverThreadLocal ().findElement (locator).isDisplayed ();
+            return getWebDriverThreadLocal().findElement(locator).isDisplayed();
         } catch (Exception e) {
             return false;
         }
     }
 
-    public String getAttribute (By locator, String attribute) {
-        return getWebElement (locator).getAttribute (attribute);
+    public String getAttribute(By locator, String attribute) {
+        return getWebElement(locator).getDomAttribute(attribute);
     }
 
-    public String getElementText (By locator) {
-        return getWebElement (locator).getText ();
+    public String getElementText(By locator) {
+        return getWebElement(locator).getText();
     }
 }

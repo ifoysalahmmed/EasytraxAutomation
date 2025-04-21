@@ -15,6 +15,11 @@
                     <include name="test_password_reset_with_invalid_email"/>
                 </methods>
             </class>
+            <class name="testcases.TestDashboardPage">
+                <methods>
+                    <include name="test_dashboard_page"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

@@ -21,3 +21,4 @@ To run the tests, use the following Maven command:
 
 ```sh
 mvn test
+```
